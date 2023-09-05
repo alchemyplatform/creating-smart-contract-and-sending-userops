@@ -1,0 +1,30 @@
+{
+  "name": "alchemy-aa-sdk-initiate-tx",
+  "version": "1.0.0",
+  "description": "tutorial demonstrating how to create an account and initiate a transaction",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "execute:ts-core": "tsx -r dotenv/config src/ts/core/index.ts",
+    "execute:ts-ethers": "tsx -r dotenv/config src/ts/ethers/index.ts",
+    "execute:js-core": "tsx -r dotenv/config src/js/core/index.js",
+    "execute:js-ethers": "tsx -r dotenv/config src/js/ethers/index.js",
+    "getCFaddress": "tsx -r dotenv/config scripts/getCounterfactual.ts",
+    "sendETH": "tsx -r dotenv/config scripts/sendEthToSCA.ts"
+  },
+  "author": "Alchemy",
+  "license": "ISC",
+  "dependencies": {
+    "@alchemy/aa-core": "^0.1.0-alpha.17",
+    "@alchemy/aa-ethers": "^0.1.0-alpha.17",
+    "alchemy-sdk": "^2.9.0",
+    "dotenv": "^16.0.3",
+    "ethers": "^6.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.5",
+    "tslib": "^2.5.2",
+    "tsx": "^3.12.7",
+    "typescript": "^5.0.4"
+  }
+}
