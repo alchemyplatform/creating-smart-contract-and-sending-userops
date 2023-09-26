@@ -6,7 +6,7 @@ import {
 import { Alchemy, Network, type AlchemyProvider } from "alchemy-sdk";
 import { Wallet } from "@ethersproject/wallet";
 import {
-  type SimpleSmartAccountOwner,
+  type SmartAccountSigner,
   SimpleSmartContractAccount,
   getChain,
 } from "@alchemy/aa-core";
@@ -31,8 +31,7 @@ export async function createSigner() {
 
   const owner: Wallet = new Wallet(PRIV_KEY);
 
-  const accountOwner: SimpleSmartAccountOwner =
-    convertWalletToAccountSigner(owner);
+  const accountOwner: SmartAccountSigner = convertWalletToAccountSigner(owner);
 
   const signer: AccountSigner = EthersProviderAdapter.fromEthersProvider(
     provider,
