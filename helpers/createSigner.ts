@@ -1,10 +1,9 @@
 import {
-  type SimpleSmartAccountOwner,
+  type SmartAccountSigner,
   SimpleSmartContractAccount,
   SmartAccountProvider,
+  LocalAccountSigner,
 } from "@alchemy/aa-core";
-import { privateKeyToAccount } from "viem/accounts";
-import { toHex } from "viem/utils";
 import { sepolia } from "viem/chains";
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -17,17 +16,8 @@ const SIMPLE_ACCOUNT_FACTORY_ADDRESS =
   "0x9406Cc6185a346906296840746125a0E44976454";
 
 export default async function createSigner() {
-  const account = privateKeyToAccount(`0x${PRIV_KEY}`);
-
-  const owner: SimpleSmartAccountOwner = {
-    signMessage: async (msg) =>
-      account.signMessage({
-        message: {
-          raw: toHex(msg),
-        },
-      }),
-    getAddress: async () => account.address,
-  };
+  const owner: SmartAccountSigner =
+    LocalAccountSigner.privateKeyToAccountSigner(`0x${PRIV_KEY}`);
 
   const chain = sepolia;
   const provider = new SmartAccountProvider(
