@@ -21,7 +21,7 @@ async function main() {
 
   const txHash = await wallet.sendTransaction({
     to: counterfactualAddress as `0x${string}`,
-    value: parseEther("0.5"),
+    value: parseEther("0.1"),
   });
 
   return txHash;

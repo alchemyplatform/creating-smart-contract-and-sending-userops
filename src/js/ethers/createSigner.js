@@ -3,16 +3,20 @@ import {
   convertWalletToAccountSigner,
 } from "@alchemy/aa-ethers";
 import { Network, Alchemy } from "alchemy-sdk";
+import { sepolia } from "viem/chains";
 
-import { Wallet } from "ethers";
-import { SimpleSmartContractAccount, getChain } from "@alchemy/aa-core";
+import { Wallet } from "@ethersproject/wallet";
+import { getChain } from "@alchemy/aa-core";
+import {
+  LightSmartContractAccount,
+  getDefaultLightAccountFactory,
+} from "@alchemy/aa-accounts";
 
 const PRIV_KEY = process.env.PRIV_KEY;
 const ALCHEMY_API_KEY = process.env.ALCHEMY_API_KEY;
 
-const ENTRYPOINT_ADDRESS = "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789";
-const SIMPLE_ACCOUNT_FACTORY_ADDRESS =
-  "0x9406Cc6185a346906296840746125a0E44976454";
+const entryPointAddress = "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789";
+const factoryAddress = getDefaultLightAccountFactory(sepolia);
 
 /**
  * @description Creates a smart contract account that can be used to send user operations.
@@ -31,15 +35,15 @@ export async function createSigner() {
 
   const signer = EthersProviderAdapter.fromEthersProvider(
     provider,
-    ENTRYPOINT_ADDRESS
+    entryPointAddress
   ).connectToAccount(
     (rpcClient) =>
-      new SimpleSmartContractAccount({
-        entryPointAddress: ENTRYPOINT_ADDRESS,
+      new LightSmartContractAccount({
+        entryPointAddress,
         chain: getChain(provider.network.chainId),
         owner: accountOwner,
-        factoryAddress: SIMPLE_ACCOUNT_FACTORY_ADDRESS,
-        rpcClient: rpcClient,
+        factoryAddress,
+        rpcClient,
       })
   );
 
