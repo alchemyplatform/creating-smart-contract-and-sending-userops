@@ -1,4 +1,4 @@
-import createSigner from "../helpers/createSigner";
+import { createSigner } from "../helpers/createSigner";
 import fs from "fs";
 import path from "path";
 import * as dotenv from "dotenv";
